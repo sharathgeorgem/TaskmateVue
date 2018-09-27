@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Taskmate Vue</title>
+		<link rel="stylesheet" href="css/app.css">
+		<script src="js/Vue.js"></script>
+	</head>
+	<body id="body">
+		<section class="todoapp">
+			<header class="header">
+				<h1>Taskmate</h1>
+				<input class="new-todo"
+				v-model="newTodo"
+				v-on:keyup.enter="addTodo"
+				placeholder="What needs to be done?" autofocus>
+			</header>
+			<section class="main">
+			  <ul class="todo-list">
+				  <li v-for="todo in todos"
+				  :class="{ completed: todo.completed, editing: todo == editedTodo }">
+				  <div class="view">
+					  <input class="toggle" type="checkbox" v-model="todo.completed" v-on:change="completeTodo(todo)"/>
+					  <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+					  <input v-if="!todo.isHidden" class="commentBox" type="text" v-model="todo.comment" @keyup.enter="commentTodo(todo)" @blur="commentTodo(todo)"/>
+					  <button class="commentButton" @click="todo.isHidden = !todo.isHidden" :class="{editing : !todo.isHidden}"></button>
+					  <button class="destroy" @click="removeTodo(todo)"></button>
+				  </div>
+				  <input class="edit" type="text" v-model="todo.title" @blur="doneEditTodo(todo)" @keyup.enter="doneEditTodo(todo)">
+				</li>
+			  </ul>
+			</section>
+		</section>
+		<script src="js/app.js"></script>
+	</body>
+</html>
