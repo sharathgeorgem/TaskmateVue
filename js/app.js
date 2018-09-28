@@ -10,7 +10,7 @@
   },
   methods: {
     addTodo: function () {
-      this.todos.push({title: this.newTodo, completed: false, comment: null, isHidden: true, id: this.todos.length + 1})
+      this.todos.push({title: this.newTodo, completed: false, comment: null, isHidden: true, id: this.todos.length})
       this.newTodo = ''
       window.localStorage.setItem(storeTodo, JSON.stringify(this.todos))
     },

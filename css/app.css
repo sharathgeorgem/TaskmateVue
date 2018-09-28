@@ -1,7 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300');
+
 html,
 body {
 	margin: 0;
 	padding: 0;
+	font-family: 'Quicksand', sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #000000; 
+}
+::-webkit-scrollbar-thumb {
+    background: #ff005b; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
 
 button {
@@ -16,20 +32,16 @@ button {
 	color: inherit;
 	-webkit-appearance: none;
 	appearance: none;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	line-height: 1.4em;
-	background: #f5f5f5;
-	color: #4d4d4d;
+	background: url(../black-brick-wall-texture.jpg);
+	background-size: cover;
+	color: #fff;
 	min-width: 230px;
 	max-width: 550px;
 	margin: 0 auto;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 	font-weight: 300;
 }
 
@@ -42,8 +54,9 @@ body {
 }
 
 .todoapp {
-	background: #fff;
-	margin: 130px 0 40px 0;
+	background-image: url(../Fine-Wood-Textures-1.jpg);
+	background-size: cover;
+	margin: 200px 0 40px 0;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -52,32 +65,55 @@ body {
 .todoapp input::-webkit-input-placeholder {
 	font-style: italic;
 	font-weight: 300;
-	color: #e6e6e6;
+	color: #161414;
 }
 
 .todoapp input::-moz-placeholder {
 	font-style: italic;
 	font-weight: 300;
-	color: #e6e6e6;
+	color: #161414;
 }
 
 .todoapp input::input-placeholder {
 	font-style: italic;
 	font-weight: 300;
-	color: #e6e6e6;
+	color: #161414;
 }
 
-.todoapp h1 {
+.todoapp h1.neon {
 	position: absolute;
-	top: -155px;
+	top: -130px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	padding: 0 20px;
+	font-size: 6em;
+	color: #fff;
+	text-shadow: 0 0 20px #ff005b;
+}
+
+.todoapp h1.neon::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0 20px;
+	z-index: -1;
+	color: #ff005b;
+	filter: blur(15px);
+}
+
+.todoapp h1.neon::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	font-size: 100px;
-	font-weight: 100;
-	text-align: center;
-	color: rgba(175, 47, 47, 0.15);
-	-webkit-text-rendering: optimizeLegibility;
-	-moz-text-rendering: optimizeLegibility;
-	text-rendering: optimizeLegibility;
+	height: 100%;
+	background: #fe3a80;
+	z-index: -2;
+	opacity: 0.5;
+	filter: blur(40px);
 }
 
 .new-todo,
@@ -170,6 +206,8 @@ body {
 	width: 506px;
 	padding: 12px 16px;
 	margin: 0 0 0 43px;
+	background: url(../weathered-red-wooden-wall-300x200.jpg);
+	background-size: cover;
 }
 
 .todo-list li.editing .view {
@@ -183,6 +221,8 @@ body {
 	margin: 0;
 	height: 60px;
 	width: 200px;
+	background: url(../weathered-red-wooden-wall-300x200.jpg);
+	background-size: cover;
 	font-size: 12px;
 	font-family: inherit;
 	border: 0;
@@ -234,7 +274,7 @@ body {
 }
 
 .todo-list li.completed label {
-	color: #d9d9d9;
+	color: #000000;
 	text-decoration: line-through;
 }
 
@@ -299,102 +339,4 @@ body {
 .todo-list li.editing:last-child {
 	margin-bottom: -1px;
 }
-
-.footer {
-	color: #777;
-	padding: 10px 15px;
-	height: 20px;
-	text-align: center;
-	border-top: 1px solid #e6e6e6;
-}
-
-.footer:before {
-	content: '';
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: 50px;
-	overflow: hidden;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
-	            0 8px 0 -3px #f6f6f6,
-	            0 9px 1px -3px rgba(0, 0, 0, 0.2),
-	            0 16px 0 -6px #f6f6f6,
-	            0 17px 2px -6px rgba(0, 0, 0, 0.2);
-}
-
-.todo-count {
-	float: left;
-	text-align: left;
-}
-
-.todo-count strong {
-	font-weight: 300;
-}
-
-.filters {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	position: absolute;
-	right: 0;
-	left: 0;
-}
-
-.filters li {
-	display: inline;
-}
-
-.filters li a {
-	color: inherit;
-	margin: 3px;
-	padding: 3px 7px;
-	text-decoration: none;
-	border: 1px solid transparent;
-	border-radius: 3px;
-}
-
-.filters li a:hover {
-	border-color: rgba(175, 47, 47, 0.1);
-}
-
-.filters li a.selected {
-	border-color: rgba(175, 47, 47, 0.2);
-}
-
-.clear-completed,
-html .clear-completed:active {
-	float: right;
-	position: relative;
-	line-height: 20px;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.clear-completed:hover {
-	text-decoration: underline;
-}
-
-.info {
-	margin: 65px auto 0;
-	color: #bfbfbf;
-	font-size: 10px;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	text-align: center;
-}
-
-.info p {
-	line-height: 1;
-}
-
-.info a {
-	color: inherit;
-	text-decoration: none;
-	font-weight: 400;
-}
-
-.info a:hover {
-	text-decoration: underline;
-}
-
 
