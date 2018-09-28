@@ -204,10 +204,9 @@ body {
 .todo-list li.editing .edit {
 	display: block;
 	width: 506px;
+	background-image: url(../darwood.jpg);
 	padding: 12px 16px;
 	margin: 0 0 0 43px;
-	background: url(../weathered-red-wooden-wall-300x200.jpg);
-	background-size: cover;
 }
 
 .todo-list li.editing .view {
@@ -220,10 +219,9 @@ body {
 	right: 100px;
 	margin: 0;
 	height: 60px;
+	background-image: url(../darwood.jpg);
 	width: 200px;
-	background: url(../weathered-red-wooden-wall-300x200.jpg);
-	background-size: cover;
-	font-size: 12px;
+	font-size: 24px;
 	font-family: inherit;
 	border: 0;
 	color: inherit;
@@ -231,6 +229,12 @@ body {
 	border: 1px solid #999;
 	box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
 	box-sizing: border-box;
+	transition: all 2s;
+}
+
+.todo-list li .commentBox:focus {
+	width: 400px;
+	transition: all 2s;
 }
 
 .todo-list li .toggle {
