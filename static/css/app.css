@@ -89,7 +89,7 @@ body {
 	padding: 0 20px;
 	font-size: 6em;
 	color: #fff;
-	text-shadow: 0 0 20px #ff005b;
+	text-shadow: 0 0 20px #ff005b;/*Check for horizontal vertical*/
 }
 
 .todoapp h1.neon::after {

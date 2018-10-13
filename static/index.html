@@ -27,7 +27,7 @@
 						:key="index">
 				      <div class="view">
 					      <input class="toggle" type="checkbox" v-model="todo.completed" v-on:change="completeTodo(todo)"/>
-					      <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+					      <label @dblclick="editTodo(todo)">{{ todo.description }}</label>
 					      <input v-if="!todo.isHidden" class="commentBox" type="text" v-model="todo.comment" @keyup.enter="commentTodo(todo)"/>
 					      <button class="commentButton" @click="todo.isHidden = !todo.isHidden" :class="{editing : !todo.isHidden}"></button>
 					      <button class="destroy" @click="removeTodo(todo)"></button>

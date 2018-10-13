@@ -1,0 +1,25 @@
+{
+  "name": "TaskmateVue",
+  "version": "1.0.0",
+  "description": "To-do app using VueJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharathgeorgem/TaskmateVue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharathgeorgem/TaskmateVue/issues"
+  },
+  "homepage": "https://github.com/sharathgeorgem/TaskmateVue#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.2"
+  }
+}
