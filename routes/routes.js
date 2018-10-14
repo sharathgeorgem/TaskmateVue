@@ -7,39 +7,80 @@ const htmlPath = path.join(__dirname, '../static')
 router.use(express.static(htmlPath))
 
 router.get('/todos', function (req, res) {
-  Todo.find({}).then(function (results) {
-    res.setHeader('Content-Type', 'application/json')
-    res.json(results)
-    // res.send(JSON.stringify(console.log({todos: results})))
-  })
+  Todo
+    .find({})
+    .then(function (results) {
+      res.setHeader('Content-Type', 'application/json')
+      res.json(results)
+    })
 })
 
 router.post('/todos', function (req, res) {
-  console.log(req.body, typeof req.body)
   let newTodo = new Todo({
     description: req.body.description,
     completed: req.body.completed,
-    isHidden: req.body.isHidden
+    isHidden: req.body.isHidden,
+    comment: req.body.comment
   })
   newTodo
     .save()
-    .then(function (result) {
-      console.log(result)
-      res.redirect('/') // Not necessary
+    .then(function () {
+      console.log('New task added')
     }) // Types of redirects
 })
 
-router.post('/todos/:uid/completed', function (req, res) {
-  console.log(req.params)
-  let todoId = req.params.id
+router.post('/todos/completed', function (req, res) {
+  let todoId = req.body.id
   Todo.findById(todoId)
     .exec()
     .then(function (result) {
-      result.completed = req.params.completed
+      result.completed = req.body.completed
       return result.save()
     })
+    .catch(function (error) {
+      console.log('Error bruh ' + error)
+    })
+})
+
+router.post('/todos/doneEdit', function (req, res) {
+  let todoId = req.body.id
+  Todo.findById(todoId)
+    .exec()
     .then(function (result) {
-      res.redirect('/')
+      result.description = req.body.description
+      return result.save()
+    })
+    .then(function () {
+      res.description = req.body.description
+    })
+    .catch(function (error) {
+      console.log('Error bruh ' + error)
+    })
+})
+
+router.post('/todos/remove', function (req, res) {
+  let todoId = req.body.id
+  Todo
+    .remove({_id: todoId})
+    .then(function () {
+      console.log('Task removed')
+    })
+    .catch(function (error) {
+      console.log('Error bruh ' + error)
+    })
+})
+
+router.post('/todos/comment', function (req, res) {
+  let todoId = req.body.id
+  Todo.findById(todoId)
+    .exec()
+    .then(function (result) {
+      result.comment = req.body.comment
+      result.isHidden = req.body.isHidden
+      return result.save()
+    })
+    .catch(function (error) {
+      console.log('Error bruh ' + error)
     })
 })
 

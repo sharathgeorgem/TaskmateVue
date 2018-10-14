@@ -6,7 +6,6 @@
     todos: []
   },
   created () {
-    console.log(this)
     fetch('http://localhost:3000/todos')
       .then((response) => {
         return response.json()
@@ -14,17 +13,22 @@
       .then((todosInDB) => {
         this.todos = todosInDB
       })
-    // this.todos = JSON.parse(window.localStorage.getItem('todo-storage') || '[]')
   },
   methods: {
     addTodo: function () {
-      this.todos.push({description: this.newTodo, completed: false, comment: null, isHidden: true, id: this.todos.length})
+      this.todos.push({
+        description: this.newTodo,
+        completed: false,
+        comment: 'No comment',
+        isHidden: true,
+        id: this.todos.length
+      })
       fetch('http://localhost:3000/todos', {
         method: 'POST',
         body: JSON.stringify({
           description: this.newTodo,
           completed: false,
-          comment: null,
+          comment: 'No comment',
           isHidden: true
         }),
         headers: {
@@ -34,11 +38,20 @@
         .then(response => console.log('Success:', JSON.stringify(response)))
         .catch(error => console.error('Error:', error))
       this.newTodo = ''
-      window.localStorage.setItem(storeTodo, JSON.stringify(this.todos))
     },
     removeTodo: function (todo) {
       this.todos.splice(this.todos.indexOf(todo), 1)
-      window.localStorage.setItem(storeTodo, JSON.stringify(this.todos))
+      fetch('http://localhost:3000/todos/remove', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: todo._id
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
     },
     editTodo: function (todo) {
       this.editedTodo = todo
@@ -52,14 +65,27 @@
       if (!todo.title) {
         this.removeTodo(todo)
       }
-      window.localStorage.setItem(storeTodo, JSON.stringify(this.todos))
-    },
-    completeTodo: function () {
-      window.localStorage.setItem(storeTodo, JSON.stringify(this.todos))
-      fetch('http://localhost:3000/todos/{{_id}}/completed', {
+      let taskIndex = this.todos.findIndex((obj) => obj._id === todo._id)
+      this.todos[taskIndex].description = todo.title
+      fetch('http://localhost:3000/todos/doneEdit', {
         method: 'POST',
         body: JSON.stringify({
-          completed: this.completed
+          id: todo._id,
+          description: todo.title
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
+    },
+    completeTodo: function (todo) {
+      fetch('http://localhost:3000/todos/completed', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: todo._id,
+          completed: todo.completed
         }),
         headers: {
           'Content-Type': 'application/json'
@@ -70,9 +96,19 @@
     },
     commentTodo: function (todo) {
       todo.isHidden = true
-      window.localStorage.setItem(storeTodo, JSON.stringify(this.todos))
+      fetch('http://localhost:3000/todos/comment', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: todo._id,
+          isHidden: todo.isHidden,
+          comment: todo.comment
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
     }
   }
 }))()
-
-var storeTodo = 'todo-storage'
